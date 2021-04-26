@@ -4,9 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>퇴실</title>
+<title>Insert title here</title>
 </head>
 <body>
-만들예정
+outroom.jsp
 </body>
 </html>

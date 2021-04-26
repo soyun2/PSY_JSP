@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>ID 찾기</title>
+<title>Insert title here</title>
 </head>
 <body>
 idsearch.jsp
