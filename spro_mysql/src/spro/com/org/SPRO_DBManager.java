@@ -9,21 +9,14 @@ public class SPRO_DBManager {
 	
 
 	public SPRO_MEMBER ckLogin(String id,String pw) {
-		SPRO_MEMBER member = null;
-		
+		SPRO_MEMBER member = null;		
 		Connection conn =  null;	// DB 연결객체
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
-			// oracle mysql mssql
 			Class.forName(DBInfo.mysql_class);
-			
-			conn = 
-DriverManager.getConnection(DBInfo.mysql_url, DBInfo.mysql_id, DBInfo.mysql_pw);
-			pstmt = conn.prepareStatement(""
-							+ "SELECT * FROM MEMBER " 
-							+ " WHERE ID=? AND PW=? "
-							+ "");
+			conn = DriverManager.getConnection(DBInfo.mysql_url, DBInfo.mysql_id, DBInfo.mysql_pw);
+			pstmt = conn.prepareStatement("SELECT * FROM MEMBER WHERE ID=? AND PW=?");
 			pstmt.setString(1, id);
 			pstmt.setString(2, pw);
 			rs = pstmt.executeQuery();

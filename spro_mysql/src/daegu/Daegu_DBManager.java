@@ -25,6 +25,7 @@ public class Daegu_DBManager {
 				{
 					doro = doro.substring(0,doro.length()-1);
 				}
+				
 				List dg_list = new List();
 				dg_list.setName(rs.getString("name"));
 				dg_list.setType(rs.getString("code4"));

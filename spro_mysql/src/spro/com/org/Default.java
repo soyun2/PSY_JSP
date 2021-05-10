@@ -3,10 +3,13 @@ package spro.com.org;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
+import daegu.DBInfo;
 
 public class Default {
 
-	public void copy() {
+	public void insert() {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		try{
@@ -40,4 +43,32 @@ public class Default {
 			}
 		}
 	}
+	
+	public void select() {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try{
+			Class.forName(DBInfo.mysql_class);
+			conn = DriverManager.getConnection(DBInfo.mysql_url, DBInfo.mysql_id, DBInfo.mysql_pw);
+
+			pstmt = conn.prepareStatement("select");
+			
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				System.out.println("테이블 내용 있음.");
+			}
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+		finally{
+			try{
+				if(pstmt != null) pstmt.close();
+				if(conn != null) conn.close();
+			}catch(Exception ex){
+				
+			}
+		}
+}
 }
