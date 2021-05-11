@@ -8,6 +8,82 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SPRO_DaeGuManager {
+	public String selectcode4() {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String ret = "[";
+		try{
+			Class.forName(DBInfo.mysql_class);
+			conn = DriverManager.getConnection(DBInfo.mysql_url, DBInfo.mysql_id, DBInfo.mysql_pw);
+			pstmt = conn.prepareStatement(
+					" select code2_name as name," + 
+					"	count(*) as cnt " + 
+					" from daegu " + 
+					" group by code2_name " + 
+					" order by cnt asc " + 
+					" limit 0,10");
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				if(rs.isLast())
+					ret += rs.getInt("cnt");
+				else
+					ret += rs.getInt("cnt")+",";
+			}
+			ret +="]";
+			System.out.println("ret = "+ret);
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+		finally{
+			try{
+				if(pstmt != null) pstmt.close();
+				if(conn != null) conn.close();
+			}catch(Exception ex){
+				
+			}
+		}
+		return ret;
+	}
+	
+	public String selectStr() {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String ret = "[";
+		try{
+			Class.forName(DBInfo.mysql_class);
+			conn = DriverManager.getConnection(DBInfo.mysql_url, DBInfo.mysql_id, DBInfo.mysql_pw);
+			// 블럭 지정 후 ctrl+ shift + x 대문자 지정
+			// 블럭 지정 후 ctrl+ shift + y 소문자 지정
+			pstmt = conn.prepareStatement(
+					"select code2_name as name, count(*) as cnt from daegu\r\n" + 
+					"group by code2_name order by cnt asc limit 0,10;");
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				if(rs.isLast())
+					ret += rs.getInt("cnt");
+				else
+					ret += rs.getInt("cnt")+",";
+			}
+			ret +="]";
+			System.out.println("ret = "+ret);
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+		finally{
+			try{
+				if(pstmt != null) pstmt.close();
+				if(conn != null) conn.close();
+			}catch(Exception ex){
+				
+			}
+		}
+		return ret;
+	}
+	
 	public List<SPRO_DaeGu> select(int pageNum) {
 		List<SPRO_DaeGu> list = new ArrayList<SPRO_DaeGu>();
 		pageNum=0;

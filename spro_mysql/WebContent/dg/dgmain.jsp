@@ -27,21 +27,35 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="/spro_mysql/WebContent/css/mycss.css" />
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('#code2').on('click',function(){
+			location.href='dgcode2.jsp';
+		});
+		$('#code4').on('click',function(){
+			location.href='dgcode4.jsp';
+		});
+	});
+</script>
 </head>
 <body>
 	<div class="jumbotron">
+		<div class="row">
+			<input class="btn btn-primary ml-2 mr-2 mb-2" type="button"	value="분류2" id="code2" /> 
+			<input class="btn btn-primary ml-2 mr-2 mb-2" type="button" value="분류4" id="code4" />
+		</div>
 		<h1>DAEGU</h1>
-	</div>
-	<div>
+		<p>대구상권</p>
 		<table class="table table-dark table-hover text-center">
 			<thead>
 				<tr>
-					<th>순번</th>	<th>이름</th>	<th>코드</th>	<th>코드</th>	<th>코드</th>	<th>주소</th>
+					<th>순번</th>	<th>이름</th><th>코드</th>	<th>코드</th>	<th>코드</th>	<th>주소</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -58,5 +72,6 @@
 			</tbody>
 		</table>
 	</div>
+
 </body>
 </html>
