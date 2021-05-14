@@ -8,6 +8,41 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SPRO_DaeGuManager {
+	public String selectcode4name() {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String ret = "[";
+		try{
+			Class.forName(DBInfo.mysql_class);
+			conn = DriverManager.getConnection(DBInfo.mysql_url, DBInfo.mysql_id, DBInfo.mysql_pw);
+			pstmt = conn.prepareStatement(
+					"select code4, count(*) as cnt from daegu group by code4 having cnt<100\r\n" + 
+					"order by cnt desc limit 0,10;");
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				if(rs.isLast())
+					ret += rs.getString("code4");
+				else
+					ret += rs.getString("code4")+",";
+			}
+			ret +="]";
+			System.out.println("ret = "+ret);
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+		finally{
+			try{
+				if(pstmt != null) pstmt.close();
+				if(conn != null) conn.close();
+			}catch(Exception ex){
+				
+			}
+		}
+		return ret;
+	}
+	
 	public String selectcode4() {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -17,12 +52,8 @@ public class SPRO_DaeGuManager {
 			Class.forName(DBInfo.mysql_class);
 			conn = DriverManager.getConnection(DBInfo.mysql_url, DBInfo.mysql_id, DBInfo.mysql_pw);
 			pstmt = conn.prepareStatement(
-					" select code2_name as name," + 
-					"	count(*) as cnt " + 
-					" from daegu " + 
-					" group by code2_name " + 
-					" order by cnt asc " + 
-					" limit 0,10");
+					"select code4, count(*) as cnt from daegu group by code4 having cnt<100\r\n" + 
+					"order by cnt desc limit 0,10;");
 			rs = pstmt.executeQuery();
 			while(rs.next()){
 				if(rs.isLast())
@@ -149,5 +180,39 @@ public class SPRO_DaeGuManager {
 			}		
 		}
 		return list;
+	}
+
+	public int pageCount() {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try{
+			Class.forName(DBInfo.mysql_class);
+			conn = DriverManager.getConnection(DBInfo.mysql_url, DBInfo.mysql_id, DBInfo.mysql_pw);
+			pstmt = conn.prepareStatement("SELECT COUNT(*) FROM DAEGU;");
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				int rowcnt = rs.getInt(1);
+				System.out.println("rowcnt = "+rowcnt);
+				int pagecnt = rowcnt/10;
+				if(rowcnt%10>0)
+					pagecnt++;
+				System.out.println("현재 페이지 갯수 pagecnt = "+pagecnt);
+				return pagecnt;
+			}
+		}
+		catch(Exception e){
+			e.printStackTrace();
+			return 0;
+		}
+		finally{
+			try{
+				if(pstmt != null) pstmt.close();
+				if(conn != null) conn.close();
+			}catch(Exception ex){
+				
+			}
+		}
+		return 0;
 	}
 }

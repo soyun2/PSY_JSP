@@ -6,21 +6,23 @@
 <%
 	SPRO_DaeGuManager sdbm = new SPRO_DaeGuManager();
 	List<SPRO_DaeGu> list = sdbm.select(0);
+	int pageCnt = sdbm.pageCount();
+	out.println(pageCnt);
 	// 	for(int i=0;i<list.size();i++){
 	// 		SPRO_DaeGu sd = list.get(i);
 	// 		System.out.println(sd);
 	// 	}
-	for (SPRO_DaeGu sd : list) {
-		System.out.println(sd.getIdx());
-		System.out.println(sd.getName());
-		System.out.println(sd.getCode1());
-		System.out.println(sd.getCode1_name());
-		System.out.println(sd.getCode2());
-		System.out.println(sd.getCode2_name());
-		System.out.println(sd.getCode4());
-		System.out.println(sd.getCode4_name());
-		System.out.println(sd.getDoro_addr());
-	}
+// 	for (SPRO_DaeGu sd : list) {
+// 		System.out.println(sd.getIdx());
+// 		System.out.println(sd.getName());
+// 		System.out.println(sd.getCode1());
+// 		System.out.println(sd.getCode1_name());
+// 		System.out.println(sd.getCode2());
+// 		System.out.println(sd.getCode2_name());
+// 		System.out.println(sd.getCode4());
+// 		System.out.println(sd.getCode4_name());
+// 		System.out.println(sd.getDoro_addr());
+// 	}
 %>
 <!DOCTYPE html>
 <html>
@@ -71,6 +73,11 @@
 				<%}%>
 			</tbody>
 		</table>
+		<%
+			for(int i=1;i<pageCnt;i++){
+				out.print(" <a href=\"?pageCnt="+i+"\">["+i+"]</a> ");
+			}
+		%>
 	</div>
 
 </body>

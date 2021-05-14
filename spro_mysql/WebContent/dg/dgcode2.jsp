@@ -32,9 +32,7 @@
 		유료회원시 모든 데이터 볼수있음.
 	</p>
 	<svg id="myGraph" width="430" height="300">
-<!--         <rect x="10" y="30" width="100" height="80"/> -->
     </svg>
-<!--     <script src="../js/sample.js"></script> -->
 </div>
 </body>
 </html>

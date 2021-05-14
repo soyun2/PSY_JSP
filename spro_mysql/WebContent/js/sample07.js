@@ -7,7 +7,7 @@ function doGra(dataSet){
 	.append("rect")						// SVG 사각형 생성
 	.attr("x", 0)							// 가로형 막대그래프이므로 X좌표를 0으로 함
 	.attr("y", function(d,i){			// Y 좌표를 배열의 순서에 따라 계산
-		return i * 25;					// 막대그래프의 높이를 25px 단위로 계산
+		return i * 20;					// 막대그래프의 높이를 25px 단위로 계산
     })
     .attr("height", "20px")			    // 막대그래프의 높이를 20px로 지정
 	.attr("width", "0px")
@@ -23,11 +23,11 @@ function doGra(dataSet){
     })
     
     var xScale = d3.scaleLinear()  // 선형 스케일 설정
-        .domain([0, 500])   // 원래 데이터 범위
-        .range([0, 500])  // 실제 출력 크기
+        .domain([0, 100])   // 원래 데이터 범위
+        .range([0, 300])  // 실제 출력 크기
     // 눈금을 설정하고 표시
     d3.select("#myGraph")
 	    .append("g")
-	    .attr("transform", "translate(0,130)")      // This controls the vertical position of the Axis
+	    .attr("transform", "translate(0,200)")      // This controls the vertical position of the Axis
 	    .call(d3.axisBottom(xScale));
 }
